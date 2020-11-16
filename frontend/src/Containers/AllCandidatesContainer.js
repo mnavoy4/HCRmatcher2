@@ -25,9 +25,17 @@ export default function AllCadidatesContainer() {
           { title: "Security Clearance", field: 'clearance' }
         ]}
         options={{
-          search: true
+          search: true,
+          actionsColumnIndex: -1
         }}
         data={candidateData}
+        actions={[
+          {
+            icon: 'delete',
+            tooltip: 'Delete Candidate',
+            onClick: (event, rowData) => alert("You want to delete this candidate " + rowData.name)
+          }
+        ]}
       />
     </div>
   )
