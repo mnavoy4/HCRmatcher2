@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import * as candidates from '../data';
 import { tableIcons } from '../assets/tableIcons'
+import NavBar from '../Components/NavBar';
 
 export default function AllCadidatesContainer() {
 
@@ -12,6 +13,7 @@ export default function AllCadidatesContainer() {
   console.log(candidateData);
   return (
     <div>
+      <NavBar/>
       <h1 className='table-h1'>All Candidates</h1>
       <div className='table-container'>
         <MaterialTable
