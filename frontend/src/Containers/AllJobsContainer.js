@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { tableIcons } from '../assets/tableIcons';
 import MaterialTable from 'material-table';
 import * as jobs from '../jobData';
+import NavBar from '../Components/NavBar';
 
 export default function AllJobsContainer(){
 
@@ -11,6 +12,7 @@ export default function AllJobsContainer(){
   }, [])
   return (
     <div>
+      <NavBar/>
       <h1 className='table-h1'>All Jobs</h1>
       <div className='table-container'>
         <MaterialTable

@@ -9,16 +9,16 @@ export default function NavBar(){
   return (
     <Nav dark>
       <Link to="/">
-        <NavLink tabs active>Candidates</NavLink>
+        <NavLink dark active>Candidates</NavLink>
       </Link>
       <Link to="/jobs">
-        <NavLink tabs>Jobs</NavLink>
+        <NavLink>Jobs</NavLink>
       </Link>
       <Link to="#">
-        <NavLink tabs>Link</NavLink>
+        <NavLink>Link</NavLink>
       </Link>
       <Link to="#">
-        <NavLink tabs disabled>Disabled</NavLink>
+        <NavLink>Disabled</NavLink>
       </Link>
     </Nav>
   )
