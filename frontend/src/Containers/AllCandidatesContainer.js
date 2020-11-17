@@ -33,7 +33,7 @@ export default function AllCadidatesContainer() {
         data={candidateData}
         actions={[
           {
-            icon: 'delete',
+            icon: 'Delete',
             tooltip: 'Delete Candidate',
             onClick: (event, rowData) => alert("You want to delete this candidate " + rowData.name)
           }
