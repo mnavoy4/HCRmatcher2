@@ -19,7 +19,7 @@ const jobSchema = new mongoose.Schema({
   tags: { type: Array },
   recruiter: { type: String },
   status: { type: String, enum: ['Open', 'Closed', 'Paused'] },
-  employementType: { type: String, enum: ['Full Time', 'Contract', 'Part Time']},
+  employementType: { type: String, enum: ['Full Time', 'Contract', 'Part Time'] },
   clientFee: { type: Number, required: true }
 });
 
@@ -31,16 +31,16 @@ function capitalizeEachWord(string){
   return string.split(' ').map(capitalize).join(' ');
 }
 
-jobSchema.pre('save', function(next){
-  capitalizeEachWord(this.title);
-  capitalizeEachWord(this.city);
-  capitalizeEachWord(this.state);
-  capitalizeEachWord(this.client);
-  capitalizeEachWord(this.recruiter);
-  capitalizeEachWord(this.employementType);
-  capitalizeEachWord(this.status);
-  next();
-})
+// jobSchema.pre('save', function(next){
+//   capitalizeEachWord(this.title);
+//   capitalizeEachWord(this.city);
+//   capitalizeEachWord(this.state);
+//   capitalizeEachWord(this.client);
+//   capitalizeEachWord(this.recruiter);
+//   capitalizeEachWord(this.employementType);
+//   capitalizeEachWord(this.status);
+//   next();
+// })
 
 const jobModel = mongoose.model('Job', jobSchema);
 
