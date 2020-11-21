@@ -9,7 +9,7 @@ const candidateSchema = new mongoose.Schema({
   openToRelocation: { type: Boolean, required: true },
   willingToGo: { type: Array },
   usCitizen: { type: Boolean, required: true },
-  clearance: { type: String, enum: ["None", "Secret", "Public Trust", "Top Secret", "TS/SCI", "Confidential"] },
+  clearance: { type: String, required: true, enum: ["None", "Secret", "Public Trust", "Top Secret", "TS/SCI", "Confidential"] },
   industriesWorkedIn: { type: Array, required: true },
   companiesWorkedFor: { type: Array },
   startupExperience: { type: Boolean },
@@ -38,14 +38,15 @@ function capitalizeEachWord(string){
   return string.split(' ').map(capitalize).join(' ');
 }
 
-candidateSchema.pre('save', function(next){
-  capitalizeEachWord(this.name);
-  capitalizeEachWord(this.city);
-  capitalizeEachWord(this.state);
-  capitalizeEachWord(this.clearance);
-  capitalizeEachWord(this.stageInProcess);
-  next();
-})
+// candidateSchema.pre('save', function(next){
+//   capitalizeEachWord(this.name);
+//   capitalizeEachWord(this.city);
+//   capitalizeEachWord(this.state);
+//   capitalizeEachWord(this.clearance);
+//   capitalizeEachWord(this.stageInProcess);
+//   this.state.charAt(0).toUpperCase() + this.state.slice(1).toLowerCase()
+//   next();
+// 
 
 const candidateModel = mongoose.model("Candidate", candidateSchema);
 

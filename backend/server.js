@@ -3,7 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 // const usersRouter = require('./routes/userRoutes');
 // const jobsRouter = require('./routes/jobsRoutes');
-// const candidatesRouter = require('./routes/candidateRoutes');
+const candidatesRouter = require('./routes/candidateRoutes');
 
 require('dotenv').config();
 
@@ -20,7 +20,7 @@ connection.once('open', () => {
   console.log("MongoDB connection made")
 })
 // app.use('/jobs', jobsRouter);
-// app.use('./candidates', candidatesRouter)
+app.use('/candidates', candidatesRouter);
 // app.use('/users', usersRouter);
 
 app.listen(port, () => {
