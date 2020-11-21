@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 // const usersRouter = require('./routes/userRoutes');
-// const jobsRouter = require('./routes/jobsRoutes');
+const jobsRouter = require('./routes/jobRoutes');
 const candidatesRouter = require('./routes/candidateRoutes');
 
 require('dotenv').config();
@@ -19,7 +19,7 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB connection made")
 })
-// app.use('/jobs', jobsRouter);
+app.use('/jobs', jobsRouter);
 app.use('/candidates', candidatesRouter);
 // app.use('/users', usersRouter);
 
