@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
-import * as candidates from '../data';
 import { tableIcons } from '../assets/tableIcons'
 import NavBar from '../Components/NavBar';
+import axios from 'axios';
+
+const baseURL = 'http://localhost:5000/candidates'
 
 export default function AllCadidatesContainer() {
 
   const [candidateData, setCandidateData] = useState([])
   useEffect(() => {
-    setCandidateData(candidates.default.candidates)
+    const fetchData = async () => {
+      const result = await axios(baseURL)
+      setCandidateData(result.data)
+    }
+    fetchData();
   }, [])
-  console.log(candidateData);
+
   return (
     <div>
       <NavBar/>
@@ -21,10 +27,10 @@ export default function AllCadidatesContainer() {
           icons={tableIcons}
           columns={[
             { title: "Name", field: 'name' , type: 'string' },
-            { title: "Location", field: 'location' , type: 'string' },
+            { title: "Location", field: 'state' , type: 'string' },
             { title: "Wants Remote?", field: 'wantsRemote', type: 'boolean' },
-            { title: "Willing to relocate?", field: 'willingToRelocate', type: 'boolean' },
-            { title: "Skills", field: 'skills' },
+            { title: "Willing to relocate?", field: 'openToRelocation', type: 'boolean' },
+            // { title: "Skills", field: 'skills' },
             { title: "Industries with Experience", field: 'industriesWorkedIn' },
             { title: "US Citizen", field: "usCitizen", type: 'boolean'},
             { title: "Security Clearance", field: 'clearance' }

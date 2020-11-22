@@ -17,6 +17,7 @@ router.post('/add', (req, res) => {
     jobDescription: req.body.jobDescription,
     candidates: req.body.candidates,
     willingToSponsor: req.body.willingToSponsor,
+    citizenshipRequired: req.body.citizenshipRequired,
     relocationAssistance: req.body.relocationAssistance,
     client: req.body.client,
     salaryRange: req.body.salaryRange,

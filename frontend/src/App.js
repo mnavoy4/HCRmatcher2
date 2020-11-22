@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import AllCadidatesContainer from './Containers/AllCandidatesContainer';
 import AllJobsContainer from './Containers/AllJobsContainer';
+import 'fontsource-roboto'
 
 function App() {
   return (

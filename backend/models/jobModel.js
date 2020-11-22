@@ -11,6 +11,7 @@ const jobSchema = new mongoose.Schema({
     ref: "Candidate"
   }],
   willingToSponsor: { type: Boolean, required: true },
+  citizenshipRequired: {type: Boolean, required: true },
   relocationAssistance: { type: Boolean, required: true},
   client: { type: String },
   salaryRange: { type: String, required: true },

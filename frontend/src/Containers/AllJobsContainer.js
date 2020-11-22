@@ -3,12 +3,19 @@ import { tableIcons } from '../assets/tableIcons';
 import MaterialTable from 'material-table';
 import * as jobs from '../jobData';
 import NavBar from '../Components/NavBar';
+import axios from 'axios';
+
+const baseURL = 'http://localhost:5000/jobs'
 
 export default function AllJobsContainer(){
 
   const [jobData, setJobData] = useState([]);
   useEffect(() => {
-    setJobData(jobs.default.jobs)
+    const fetchData = async () => {
+      const result = await axios(baseURL)
+      setJobData(result)
+    }
+    fetchData()
   }, [])
   return (
     <div>
@@ -20,12 +27,12 @@ export default function AllJobsContainer(){
           icons={tableIcons}
           columns={[
             { title: "Title", field: 'title' , type: 'string' },
-            { title: "Location", field: 'location' , type: 'string'},
-            { title: "Is Remote?", field: 'isRemote', type: 'boolean' },
+            { title: "Location", field: 'state' , type: 'string'},
+            { title: "Is Remote?", field: 'remote', type: 'boolean' },
             { title: "Overall Seniority in Years", field: 'overallExperience' },
             { title: "Qualifications", field: 'skillsRequired' },
             { title: "Skills", field: 'skills' },
-            { title: "Industries", field: 'industry' },
+            { title: "Industries", field: 'industries' },
             { title: "US Citizenship Required?", field: "citizenshipRequired", type: 'boolean'},
             { title: "Security Clearance", field: 'securityClearance' }
           ]}
