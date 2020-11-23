@@ -57,6 +57,7 @@ router.post('/update/:id', (req, res) => {
       job.jobDescription = req.body.jobDescription;
       job.candidates = req.body.candidates;
       job.willingToSponsor = req.body.willingToSponsor;
+      job.citizenshipRequired = req.body.citizenshipRequired;
       job.relocationAssistance = req.body.relocationAssistance;
       job.client = req.body.client;
       job.salaryRange = req.body.salaryRange;

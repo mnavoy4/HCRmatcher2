@@ -3,6 +3,8 @@ import MaterialTable from 'material-table';
 import { tableIcons } from '../assets/tableIcons'
 import NavBar from '../Components/NavBar';
 import axios from 'axios';
+import AddCandidateButton from '../Components/AddCandidateButton';
+import { Link } from 'react-router-dom';
 
 const baseURL = 'http://localhost:5000/candidates'
 
@@ -22,6 +24,9 @@ export default function AllCadidatesContainer() {
       <NavBar/>
       <h1 className='table-h1'>All Candidates</h1>
       <div className='table-container'>
+        <Link to='/add-candidate'>
+          <AddCandidateButton />
+        </Link>
         <MaterialTable
           title = "All Candidates"
           icons={tableIcons}
