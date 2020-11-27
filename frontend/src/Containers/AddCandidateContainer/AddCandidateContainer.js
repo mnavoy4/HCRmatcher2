@@ -1,9 +1,10 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Input, Grid, Button, Container, Checkbox, TextField, Paper } from '@material-ui/core';
+import { Grid, TextField, Paper } from '@material-ui/core';
 import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
 import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
+import WillingToGoWhere from '../../Components/WillingToGoWhere'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,7 @@ export default function AddCandidateContainer(){
       <main>
         <div>
           <Paper className={classes.paper}>
-            <form className={classes.root}>
+            <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
               <Grid container>
                 <Grid item xs={6}>
                   <TextField
@@ -83,15 +84,18 @@ export default function AddCandidateContainer(){
                     name='wantsRemote'
                     rules={{ required: true }}
                     control={control}
+                    defaultValue='false'
                   />
                   <Controller
                     as={OpenToRelocationRadios}
                     name='openToRelocation'
                     rules={{ required: true }}
                     control={control}
-                    inputRef='someRef'
+                    defaultValue='true'
                   />
+                  <WillingToGoWhere/>
                 </Grid>
+                <input type='submit'/>
               </Grid>
             </form>
           </Paper>
