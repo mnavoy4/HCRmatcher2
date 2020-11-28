@@ -48,7 +48,9 @@ export default function WillingToGoWhere(){
                 inputRef={register()}
                 // name='willingToGo'
                 variant='outlined'
+                name={`willingToGo[${index}].location`}
                 label='Location'
+                defaultValue=''
               />
               <Button className={classes.removeButton} onClick={() => remove(index)}>Remove</Button>
             </div>

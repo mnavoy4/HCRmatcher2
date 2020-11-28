@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Paper } from '@material-ui/core';
 import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
 import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
-import WillingToGoWhere from '../../Components/WillingToGoWhere'
+import WillingToGoWhere from '../../Components/WillingToGoWhere';
+import usCitizenRadios from '../../Components/usCitizenRadios'
+import ClearanceSelect from '../../Components/ClearanceSelect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +82,13 @@ export default function AddCandidateContainer(){
                 </Grid>
                 <Grid item xs={6}>
                   <Controller
+                    as={usCitizenRadios}
+                    name='usCitizen'
+                    rules={{ required: true }}
+                    control={control}
+                    defaultValue='true'
+                  />
+                  <Controller
                     as={RemoteOnlyRadios}
                     name='wantsRemote'
                     rules={{ required: true }}
@@ -93,7 +102,19 @@ export default function AddCandidateContainer(){
                     control={control}
                     defaultValue='true'
                   />
-                  <WillingToGoWhere/>
+                  <Controller
+                    as={WillingToGoWhere}
+                    name='willingToGo'
+                    control={control}
+                    defaultValue=''
+                  />
+                  <Controller
+                    as={ClearanceSelect}
+                    name='clearance'
+                    defaultValue='None'
+                    rules={{ required: true }}
+                    control={control}
+                  />
                 </Grid>
                 <input type='submit'/>
               </Grid>
