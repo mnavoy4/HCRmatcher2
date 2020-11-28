@@ -48,7 +48,7 @@ export default function WillingToGoWhere(){
                 inputRef={register()}
                 // name='willingToGo'
                 variant='outlined'
-                name={`willingToGo[${index}].location`}
+                // name={`willingToGo[${index}].location`}
                 label='Location'
                 defaultValue=''
               />

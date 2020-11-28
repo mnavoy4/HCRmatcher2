@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, InputLabel, MenuItem, Select, Paper, FormControl, FormLabel } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,13 +20,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ClearanceSelect(){
 
-  const classes = useStyles()
+  const classes = useStyles();
+  const { register, control } = useForm();
 
   return (
     <Paper className={classes.paper}>
       <FormControl>
         <FormLabel>Clearance?</FormLabel>
-        <Select defaultValue='None'>
+        <Select>
           <MenuItem value='None'>None</MenuItem>
           <MenuItem value='Public Trust'>Public Trust</MenuItem>
           <MenuItem value='Confidential'>Confidential</MenuItem>

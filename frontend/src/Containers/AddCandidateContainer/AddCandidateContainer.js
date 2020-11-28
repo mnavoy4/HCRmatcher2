@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Paper } from '@material-ui/core';
+import { Grid, TextField, Paper, Select, MenuItem } from '@material-ui/core';
 import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
 import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
 import WillingToGoWhere from '../../Components/WillingToGoWhere';
@@ -102,14 +102,21 @@ export default function AddCandidateContainer(){
                     control={control}
                     defaultValue='true'
                   />
-                  <Controller
+                  {/* <Controller
                     as={WillingToGoWhere}
                     name='willingToGo'
                     control={control}
                     defaultValue=''
-                  />
+                  /> */}
                   <Controller
-                    as={ClearanceSelect}
+                    as={<Select>
+                    <MenuItem value='None'>None</MenuItem>
+                    <MenuItem value='Public Trust'>Public Trust</MenuItem>
+                    <MenuItem value='Confidential'>Confidential</MenuItem>
+                    <MenuItem value='Secret'>Secret</MenuItem>
+                    <MenuItem value='Top Secret'>Top Secret</MenuItem>
+                    <MenuItem value='TS/SCI'>TS/SCI</MenuItem>
+                  </Select>}
                     name='clearance'
                     defaultValue='None'
                     rules={{ required: true }}
@@ -121,7 +128,6 @@ export default function AddCandidateContainer(){
             </form>
           </Paper>
         </div>
-
       </main>
     </div>
   )
