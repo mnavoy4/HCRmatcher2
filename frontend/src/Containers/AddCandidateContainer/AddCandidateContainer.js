@@ -1,12 +1,12 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Paper, Select, MenuItem } from '@material-ui/core';
-import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
-import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
-import WillingToGoWhere from '../../Components/WillingToGoWhere';
-import usCitizenRadios from '../../Components/usCitizenRadios'
-import ClearanceSelect from '../../Components/ClearanceSelect';
+import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Radio, FormLabel, FormControl } from '@material-ui/core';
+// import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
+// import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
+// import WillingToGoWhere from '../../Components/WillingToGoWhere';
+// import usCitizenRadios from '../../Components/UsCitizenRadios'
+// import ClearanceRadios from '../../Components/ClearanceRadios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     margin: theme.spacing(5)
+  },
+  radiosPaper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    margin: theme.spacing(1)
   },
   h1: {
     textAlign: 'center'
@@ -82,21 +88,51 @@ export default function AddCandidateContainer(){
                 </Grid>
                 <Grid item xs={6}>
                   <Controller
-                    as={usCitizenRadios}
+                    as={
+                      <Paper className={classes.radiosPaper}>
+                        <FormControl>
+                          <FormLabel>US Citizen?</FormLabel>
+                          <RadioGroup row>
+                            <FormControlLabel value='true' control={<Radio/>} label='Citizen'/>
+                            <FormControlLabel value='false' control={<Radio/>} label='Not a citizen'/>
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>
+                    }
                     name='usCitizen'
                     rules={{ required: true }}
                     control={control}
                     defaultValue='true'
                   />
                   <Controller
-                    as={RemoteOnlyRadios}
+                    as={
+                      <Paper className={classes.radiosPaper}>
+                        <FormControl>
+                          <FormLabel>Only wants remote position?</FormLabel>
+                          <RadioGroup row>
+                            <FormControlLabel value='true' control={<Radio/>} label='Wants remote position only'/>
+                            <FormControlLabel value='false' control={<Radio/>} label='Open to non-remote position'/>
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>
+                    }
                     name='wantsRemote'
                     rules={{ required: true }}
                     control={control}
                     defaultValue='false'
                   />
                   <Controller
-                    as={OpenToRelocationRadios}
+                    as={
+                      <Paper className={classes.radiosPaper}>
+                        <FormControl>
+                          <FormLabel>Open to Relocation?</FormLabel>
+                          <RadioGroup row>
+                            <FormControlLabel value='true' control={<Radio/>} label='Open to relocation'/>
+                            <FormControlLabel value='false' control={<Radio/>} label='Not willing to relocate'/>
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>
+                    }
                     name='openToRelocation'
                     rules={{ required: true }}
                     control={control}
@@ -109,14 +145,21 @@ export default function AddCandidateContainer(){
                     defaultValue=''
                   /> */}
                   <Controller
-                    as={<Select>
-                    <MenuItem value='None'>None</MenuItem>
-                    <MenuItem value='Public Trust'>Public Trust</MenuItem>
-                    <MenuItem value='Confidential'>Confidential</MenuItem>
-                    <MenuItem value='Secret'>Secret</MenuItem>
-                    <MenuItem value='Top Secret'>Top Secret</MenuItem>
-                    <MenuItem value='TS/SCI'>TS/SCI</MenuItem>
-                  </Select>}
+                    // as={ClearanceRadios}
+                    as={
+                      <Paper className={classes.radiosPaper}>
+                        <FormControl>
+                          <FormLabel>Clearance?</FormLabel>
+                          <RadioGroup row>
+                            <FormControlLabel value='None' control={<Radio/>} label='None'/>
+                            <FormControlLabel value='Public Trust' control={<Radio/>} label='Public Trust'/>
+                            <FormControlLabel value='Confidential' control={<Radio/>} label='Confidential'/>
+                            <FormControlLabel value='Secret' control={<Radio/>} label='Secret'/>
+                            <FormControlLabel value='Top Secret' control={<Radio/>} label='Top Secret'/>
+                            <FormControlLabel value='TS/SCI' control={<Radio/>} label='TS/SCI'/>
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>}
                     name='clearance'
                     defaultValue='None'
                     rules={{ required: true }}

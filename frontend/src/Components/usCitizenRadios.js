@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function OpenToRelocationRadios(){
+export default function UsCitizenRadiosRadios(){
 
   const classes = useStyles();
   
