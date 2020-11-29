@@ -1,7 +1,7 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Radio, FormLabel, FormControl } from '@material-ui/core';
+import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
 // import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
 // import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
 // import WillingToGoWhere from '../../Components/WillingToGoWhere';
@@ -38,6 +38,10 @@ export default function AddCandidateContainer(){
   const { register, handleSubmit, control } = useForm()
   const onSubmit = (data) => console.log(data);
   const classes = useStyles();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'willingToGo'
+  });
 
   return (
     <div>
@@ -138,14 +142,34 @@ export default function AddCandidateContainer(){
                     control={control}
                     defaultValue='true'
                   />
-                  {/* <Controller
-                    as={WillingToGoWhere}
+                  <Controller
+                    as={
+                      <Paper className={classes.radiosPaper}>
+                        <FormControl>
+                          <FormLabel>Where are they willing to relocate to?</FormLabel>
+                          <Button onClick={() => append({})}>Add Location</Button>
+                          {fields.map(({ id }, index) => {
+                            return (
+                              <div key={id}>
+                                <TextField
+                                  inputRef={register()}
+                                  variant='outlined'
+                                  name={`willingToGo[${index}].location`}
+                                  label='Location'
+                                  defaultValue=''
+                                />
+                                <Button onClick={() => remove(index)}>Remove</Button>
+                              </div>
+                            )
+                          })}
+                        </FormControl>
+                      </Paper>
+                    }
                     name='willingToGo'
                     control={control}
                     defaultValue=''
-                  /> */}
+                  />
                   <Controller
-                    // as={ClearanceRadios}
                     as={
                       <Paper className={classes.radiosPaper}>
                         <FormControl>

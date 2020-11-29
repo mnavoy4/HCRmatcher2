@@ -46,7 +46,7 @@ export default function WillingToGoWhere(){
             <div key={id}>
               <TextField
                 inputRef={register()}
-                // name='willingToGo'
+                name='willingToGo'
                 variant='outlined'
                 // name={`willingToGo[${index}].location`}
                 label='Location'
