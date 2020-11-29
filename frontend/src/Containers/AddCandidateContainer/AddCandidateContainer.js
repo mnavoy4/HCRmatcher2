@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
+import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
 // import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
 // import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
 // import WillingToGoWhere from '../../Components/WillingToGoWhere';
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     '& .MuiFormControl-root': {
-      width: '80%',
+      width: '95%',
       margin: theme.spacing(1)
     }
   },
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     margin: theme.spacing(5)
   },
-  radiosPaper: {
+  formItemPaper: {
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -38,10 +38,14 @@ export default function AddCandidateContainer(){
   const { register, handleSubmit, control } = useForm()
   const onSubmit = (data) => console.log(data);
   const classes = useStyles();
-  const { fields, append, remove } = useFieldArray({
+  const willingToGoFieldArray = useFieldArray({
     control,
     name: 'willingToGo'
   });
+  const industriesWorkedInFieldArray = useFieldArray({
+    name: 'industriesWorkedIn',
+    control
+  })
 
   return (
     <div>
@@ -89,11 +93,9 @@ export default function AddCandidateContainer(){
                     name='state'
                     variant='outlined'
                   />
-                </Grid>
-                <Grid item xs={6}>
                   <Controller
                     as={
-                      <Paper className={classes.radiosPaper}>
+                      <Paper className={classes.formItemPaper}>
                         <FormControl>
                           <FormLabel>US Citizen?</FormLabel>
                           <RadioGroup row>
@@ -110,7 +112,7 @@ export default function AddCandidateContainer(){
                   />
                   <Controller
                     as={
-                      <Paper className={classes.radiosPaper}>
+                      <Paper className={classes.formItemPaper}>
                         <FormControl>
                           <FormLabel>Only wants remote position?</FormLabel>
                           <RadioGroup row>
@@ -125,9 +127,11 @@ export default function AddCandidateContainer(){
                     control={control}
                     defaultValue='false'
                   />
+                </Grid>
+                <Grid item xs={6}>
                   <Controller
                     as={
-                      <Paper className={classes.radiosPaper}>
+                      <Paper className={classes.formItemPaper}>
                         <FormControl>
                           <FormLabel>Open to Relocation?</FormLabel>
                           <RadioGroup row>
@@ -144,11 +148,11 @@ export default function AddCandidateContainer(){
                   />
                   <Controller
                     as={
-                      <Paper className={classes.radiosPaper}>
+                      <Paper className={classes.formItemPaper}>
                         <FormControl>
                           <FormLabel>Where are they willing to relocate to?</FormLabel>
-                          <Button onClick={() => append({})}>Add Location</Button>
-                          {fields.map(({ id }, index) => {
+                          <Button onClick={() => willingToGoFieldArray.append({location: 'Location'})}>Add Location</Button>
+                          {willingToGoFieldArray.fields.map(({ id }, index) => {
                             return (
                               <div key={id}>
                                 <TextField
@@ -158,7 +162,7 @@ export default function AddCandidateContainer(){
                                   label='Location'
                                   defaultValue=''
                                 />
-                                <Button onClick={() => remove(index)}>Remove</Button>
+                                <Button onClick={() => willingToGoFieldArray.remove(index)}>Remove</Button>
                               </div>
                             )
                           })}
@@ -171,7 +175,7 @@ export default function AddCandidateContainer(){
                   />
                   <Controller
                     as={
-                      <Paper className={classes.radiosPaper}>
+                      <Paper className={classes.formItemPaper}>
                         <FormControl>
                           <FormLabel>Clearance?</FormLabel>
                           <RadioGroup row>
@@ -187,6 +191,33 @@ export default function AddCandidateContainer(){
                     name='clearance'
                     defaultValue='None'
                     rules={{ required: true }}
+                    control={control}
+                  />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>What industries have they worked in?</FormLabel>
+                          <Button onClick={() => industriesWorkedInFieldArray.append({industry: 'Industry'})}>Add Industry</Button>
+                          {industriesWorkedInFieldArray.fields.map(({ id }, index) => {
+                            return (
+                              <div key={id}>
+                                <TextField
+                                  inputRef={register()}
+                                  variant='outlined'
+                                  name={`industriesWorkedIn[${index}].industry`}
+                                  label='Industry'
+                                  defaultValue=''
+                                />
+                                <Button onClick={() => industriesWorkedInFieldArray.remove(index)}>Remove</Button>
+                              </div>
+                            )
+                          })}
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='industriesWorkedIn'
+                    defaultValue=''
                     control={control}
                   />
                 </Grid>
