@@ -8,7 +8,8 @@ import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGro
 // import usCitizenRadios from '../../Components/UsCitizenRadios'
 // import ClearanceRadios from '../../Components/ClearanceRadios';
 import * as allIndustries from '../../data/industries';
-import * as allSkills from '../../data/skills'
+import * as allSkills from '../../data/skills';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AddCandidateContainer(){
+const postCandidateURL = 'http://localhost:5000/candidates/add'
+
+export default function AddCandidateContainer(props){
 
   const { industries } = allIndustries.default;
   const { skills } = allSkills.default
@@ -67,21 +70,44 @@ export default function AddCandidateContainer(){
     control
   })
 
+  const stringToBoolean = (string) => {
+    if (string === 'true'){
+      return true
+    } else {
+      return false
+    }
+  }
+
   const onSubmit = (data) => {
-    // console.log(data);
-    // console.log(data.skills)
     const onlyTrueSkills = data.skills.filter((skill) => {
       return skill.skill !== false;
     });
     const onlyTrueIndustriesWorkedIn = data.industriesWorkedIn.filter((industry) => {
       return industry.industry !== false
-    })
+    });
+    const fixedCurrentSalary = parseInt(data.currentSalary);
+    const fixedOpenToRelocation = stringToBoolean(data.openToRelocation);
+    const fixedStartupExperience = stringToBoolean(data.startupExperience);
+    const fixedUsCitizen = stringToBoolean(data.usCitizen);
+    const fixedWantsRemote = stringToBoolean(data.wantsRemote);
+
     let newData = {
       ...data,
       skills: onlyTrueSkills,
-      industriesWorkedIn: onlyTrueIndustriesWorkedIn
+      industriesWorkedIn: onlyTrueIndustriesWorkedIn,
+      currentSalary: fixedCurrentSalary,
+      openToRelocation: fixedOpenToRelocation,
+      startupExperience: fixedStartupExperience,
+      usCitizen: fixedUsCitizen,
+      wantsRemote: fixedWantsRemote
     }
+    console.log(typeof newData.openToRelocation)
     console.log(newData)
+    axios.post(postCandidateURL, newData)
+      .then(response => console.log(response))
+      .catch((error) => console.log(error))
+      .then(props.history.push('/'))
+
   };
 
   return (
