@@ -41,7 +41,6 @@ export default function AddCandidateContainer(){
   const { skills } = allSkills.default
 
   const { register, handleSubmit, control } = useForm()
-  const onSubmit = (data) => console.log(data);
   const classes = useStyles();
   const willingToGoFieldArray = useFieldArray({
     control,
@@ -68,9 +67,22 @@ export default function AddCandidateContainer(){
     control
   })
 
-  const removeFalses = (array) => {
-    return array.filter()
-  }
+  const onSubmit = (data) => {
+    // console.log(data);
+    // console.log(data.skills)
+    const onlyTrueSkills = data.skills.filter((skill) => {
+      return skill.skill !== false;
+    });
+    const onlyTrueIndustriesWorkedIn = data.industriesWorkedIn.filter((industry) => {
+      return industry.industry !== false
+    })
+    let newData = {
+      ...data,
+      skills: onlyTrueSkills,
+      industriesWorkedIn: onlyTrueIndustriesWorkedIn
+    }
+    console.log(newData)
+  };
 
   return (
     <div>
