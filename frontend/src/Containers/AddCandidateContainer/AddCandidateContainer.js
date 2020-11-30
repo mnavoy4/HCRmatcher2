@@ -7,7 +7,8 @@ import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGro
 // import WillingToGoWhere from '../../Components/WillingToGoWhere';
 // import usCitizenRadios from '../../Components/UsCitizenRadios'
 // import ClearanceRadios from '../../Components/ClearanceRadios';
-import * as allIndustries from '../../industries'
+import * as allIndustries from '../../data/industries';
+import * as allSkills from '../../data/skills'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AddCandidateContainer(){
 
   const { industries } = allIndustries.default;
+  const { skills } = allSkills.default
 
   const { register, handleSubmit, control } = useForm()
   const onSubmit = (data) => console.log(data);
@@ -45,8 +47,12 @@ export default function AddCandidateContainer(){
     control,
     name: 'willingToGo'
   });
-  const industriesWorkedInFieldArray = useFieldArray({
-    name: 'industriesWorkedIn',
+  const companiesWorkedForFieldArray = useFieldArray({
+    name: 'companiesWorkedFor',
+    control
+  })
+  const extraTagsFieldArray = useFieldArray({
+    name: 'tags',
     control
   })
 
@@ -130,8 +136,6 @@ export default function AddCandidateContainer(){
                     control={control}
                     defaultValue='false'
                   />
-                </Grid>
-                <Grid item xs={6}>
                   <Controller
                     as={
                       <Paper className={classes.formItemPaper}>
@@ -197,6 +201,20 @@ export default function AddCandidateContainer(){
                     control={control}
                   />
                   <Paper className={classes.formItemPaper}>
+                    <FormLabel>Skills/Languages</FormLabel>
+                    <FormGroup>
+                    {
+                      skills.map((skill, index) => {
+                        return (
+                        <FormControlLabel label={skill} control={<Checkbox inputRef={register} color='primary' name={`skills[${index}].skill`}/>} value={skill} />
+                        )
+                      })
+                    }
+                    </FormGroup>
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper className={classes.formItemPaper}>
                     <FormLabel>Industries with Experience</FormLabel>
                     <FormGroup>
                     {
@@ -208,35 +226,76 @@ export default function AddCandidateContainer(){
                     }
                     </FormGroup>
                   </Paper>
-                  
-                  
-                  {/* <Controller
+                  <Controller
                     as={
                       <Paper className={classes.formItemPaper}>
                         <FormControl>
-                          <FormLabel>What industries have they worked in?</FormLabel>
-                          <Button onClick={() => industriesWorkedInFieldArray.append({industry: 'Industry'})}>Add Industry</Button>
-                          {industriesWorkedInFieldArray.fields.map(({ id }, index) => {
+                          <FormLabel>Notable companies they have worked for?</FormLabel>
+                          <Button onClick={() => companiesWorkedForFieldArray.append({company: 'Company'})}>Add Company</Button>
+                          {companiesWorkedForFieldArray.fields.map(({ id }, index) => {
                             return (
                               <div key={id}>
                                 <TextField
                                   inputRef={register()}
                                   variant='outlined'
-                                  name={`industriesWorkedIn[${index}].industry`}
-                                  label='Industry'
+                                  name={`companiesWorkedFor[${index}].company`}
+                                  label='Company'
                                   defaultValue=''
                                 />
-                                <Button onClick={() => industriesWorkedInFieldArray.remove(index)}>Remove</Button>
+                                <Button onClick={() => companiesWorkedForFieldArray.remove(index)}>Remove</Button>
                               </div>
                             )
                           })}
                         </FormControl>
                       </Paper>
                     }
-                    name='industriesWorkedIn'
+                    name='companiesWorkedFor'
                     defaultValue=''
                     control={control}
-                  /> */}
+                  />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Any Startup Experience?</FormLabel>
+                          <RadioGroup row>
+                            <FormControlLabel value='true' control={<Radio/>} label='Yes'/>
+                            <FormControlLabel value='false' control={<Radio/>} label='No'/>
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='startupExperience'
+                    control={control}
+                    defaultValue='false'
+                  />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Extra Tags to Classify Candidate</FormLabel>
+                          <Button onClick={() => extraTagsFieldArray.append({tag: 'Tag'})}>Add Tag</Button>
+                          {extraTagsFieldArray.fields.map(({ id }, index) => {
+                            return (
+                              <div key={id}>
+                                <TextField
+                                  inputRef={register()}
+                                  variant='outlined'
+                                  name={`tags[${index}].tag`}
+                                  label='Tag'
+                                  defaultValue=''
+                                />
+                                <Button onClick={() => extraTagsFieldArray.remove(index)}>Remove</Button>
+                              </div>
+                            )
+                          })}
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='willingToGo'
+                    control={control}
+                    defaultValue=''
+                  />
                 </Grid>
                 <input type='submit'/>
               </Grid>

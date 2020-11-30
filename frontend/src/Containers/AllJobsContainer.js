@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { tableIcons } from '../assets/tableIcons';
 import MaterialTable from 'material-table';
-import * as jobs from '../jobData';
 import NavBar from '../Components/NavBar';
 import axios from 'axios';
 
