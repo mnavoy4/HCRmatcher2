@@ -196,7 +196,9 @@ export default function AddCandidateContainer(){
                     rules={{ required: true }}
                     control={control}
                   />
-                  <FormGroup>
+                  <Paper className={classes.formItemPaper}>
+                    <FormLabel>Industries with Experience</FormLabel>
+                    <FormGroup>
                     {
                       industries.map((industry, index) => {
                         return (
@@ -204,7 +206,9 @@ export default function AddCandidateContainer(){
                         )
                       })
                     }
-                  </FormGroup>
+                    </FormGroup>
+                  </Paper>
+                  
                   
                   {/* <Controller
                     as={
