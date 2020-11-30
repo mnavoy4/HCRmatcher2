@@ -55,6 +55,22 @@ export default function AddCandidateContainer(){
     name: 'tags',
     control
   })
+  const certificationsFieldArray = useFieldArray({
+    name: 'certifications',
+    control
+  })
+  const jobTitlesFieldArray = useFieldArray({
+    name: 'jobTitles',
+    control
+  })
+  const degreesFieldArray = useFieldArray({
+    name: 'degrees',
+    control
+  })
+
+  const removeFalses = (array) => {
+    return array.filter()
+  }
 
   return (
     <div>
@@ -102,6 +118,7 @@ export default function AddCandidateContainer(){
                     name='state'
                     variant='outlined'
                   />
+                  
                   <Controller
                     as={
                       <Paper className={classes.formItemPaper}>
@@ -201,6 +218,15 @@ export default function AddCandidateContainer(){
                     control={control}
                   />
                   <Paper className={classes.formItemPaper}>
+                  <TextField
+                    label='Current Yearly Salary'
+                    inputRef={register({ required: true, pattern: /^[0-9]*$/i })}
+                    required
+                    name='currentSalary'
+                    variant='outlined'
+                  />
+                  </Paper>
+                  <Paper className={classes.formItemPaper}>
                     <FormLabel>Skills/Languages</FormLabel>
                     <FormGroup>
                     {
@@ -292,11 +318,113 @@ export default function AddCandidateContainer(){
                         </FormControl>
                       </Paper>
                     }
-                    name='willingToGo'
+                    name='tags'
                     control={control}
                     defaultValue=''
                   />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Certifications</FormLabel>
+                          <Button onClick={() => certificationsFieldArray.append({tag: 'Tag'})}>Add Certification</Button>
+                          {certificationsFieldArray.fields.map(({ id }, index) => {
+                            return (
+                              <div key={id}>
+                                <TextField
+                                  inputRef={register()}
+                                  variant='outlined'
+                                  name={`certifications[${index}].certification`}
+                                  label='Certification'
+                                  defaultValue=''
+                                />
+                                <Button onClick={() => certificationsFieldArray.remove(index)}>Remove</Button>
+                              </div>
+                            )
+                          })}
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='tags'
+                    control={control}
+                    defaultValue=''
+                  />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Degrees</FormLabel>
+                          <Button onClick={() => degreesFieldArray.append({tag: 'Tag'})}>Add Degree</Button>
+                          {degreesFieldArray.fields.map(({ id }, index) => {
+                            return (
+                              <div key={id}>
+                                <TextField
+                                  inputRef={register()}
+                                  variant='outlined'
+                                  name={`degrees[${index}].degree`}
+                                  label='Degrees'
+                                  defaultValue=''
+                                />
+                                <Button onClick={() => degreesFieldArray.remove(index)}>Remove</Button>
+                              </div>
+                            )
+                          })}
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='degrees'
+                    control={control}
+                    defaultValue=''
+                  />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Job Titles</FormLabel>
+                          <Button onClick={() => jobTitlesFieldArray.append({tag: 'Tag'})}>Add Job Title</Button>
+                          {jobTitlesFieldArray.fields.map(({ id }, index) => {
+                            return (
+                              <div key={id}>
+                                <TextField
+                                  inputRef={register()}
+                                  variant='outlined'
+                                  name={`jobTitles[${index}].jobTitle`}
+                                  label='Job Title'
+                                  defaultValue=''
+                                />
+                                <Button onClick={() => jobTitlesFieldArray.remove(index)}>Remove</Button>
+                              </div>
+                            )
+                          })}
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='jobTitles'
+                    control={control}
+                    defaultValue=''
+                  />
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Interview Process Stage</FormLabel>
+                          <RadioGroup row>
+                            <FormControlLabel value='Submitted' control={<Radio/>} label='Submitted'/>
+                            <FormControlLabel value='Client Interview' control={<Radio/>} label='Client Interview'/>
+                            <FormControlLabel value='Zoom Screen' control={<Radio/>} label='Zoom Screen'/>
+                            <FormControlLabel value='Hired' control={<Radio/>} label='Hired'/>
+                            <FormControlLabel value='Not Hired' control={<Radio/>} label='Not Hired'/>
+                            <FormControlLabel value='Offer Made' control={<Radio/>} label='Offer Made'/>
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>}
+                    name='stageInProcess'
+                    defaultValue='Not Hired'
+                    rules={{ required: true }}
+                    control={control}
+                  />
                 </Grid>
+                
                 <input type='submit'/>
               </Grid>
             </form>
