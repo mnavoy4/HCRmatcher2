@@ -7,6 +7,7 @@ import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGro
 // import WillingToGoWhere from '../../Components/WillingToGoWhere';
 // import usCitizenRadios from '../../Components/UsCitizenRadios'
 // import ClearanceRadios from '../../Components/ClearanceRadios';
+import * as allIndustries from '../../industries'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddCandidateContainer(){
+
+  const { industries } = allIndustries.default;
 
   const { register, handleSubmit, control } = useForm()
   const onSubmit = (data) => console.log(data);
@@ -193,7 +196,17 @@ export default function AddCandidateContainer(){
                     rules={{ required: true }}
                     control={control}
                   />
-                  <Controller
+                  <FormGroup>
+                    {
+                      industries.map((industry, index) => {
+                        return (
+                        <FormControlLabel label={industry} control={<Checkbox inputRef={register} color='primary' name={`industriesWorkedIn[${index}].industry`}/>} value={industry} />
+                        )
+                      })
+                    }
+                  </FormGroup>
+                  
+                  {/* <Controller
                     as={
                       <Paper className={classes.formItemPaper}>
                         <FormControl>
@@ -219,7 +232,7 @@ export default function AddCandidateContainer(){
                     name='industriesWorkedIn'
                     defaultValue=''
                     control={control}
-                  />
+                  /> */}
                 </Grid>
                 <input type='submit'/>
               </Grid>

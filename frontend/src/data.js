@@ -49,6 +49,6 @@ export default {
       industriesWorkedIn: ["finance, ", "startup, ", "cyber security, "],
       usCitizen: true,
       clearance: 'none'
-    }, 
+    }
   ]
 }
