@@ -36,7 +36,11 @@ export default function AllCadidatesContainer() {
             { title: "Wants Remote?", field: 'wantsRemote', type: 'boolean' },
             { title: "Willing to relocate?", field: 'openToRelocation', type: 'boolean' },
             // { title: "Skills", field: 'skills' },
-            { title: "Industries with Experience", field: 'industriesWorkedIn' },
+            // { title: "Industries with Experience", field: 'industriesWorkedIn', render: (rowData) => {
+            //   rowData.industriesWorkedIn.forEach((entry) => {
+            //     return entry.industry
+            //   })
+            // } },
             { title: "US Citizen", field: "usCitizen", type: 'boolean'},
             { title: "Security Clearance", field: 'clearance' }
           ]}
