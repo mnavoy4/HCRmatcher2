@@ -3,6 +3,7 @@ import { tableIcons } from '../assets/tableIcons';
 import MaterialTable from 'material-table';
 import NavBar from '../Components/NavBar';
 import axios from 'axios';
+import AddButton from '../Components/AddButton'
 
 const baseURL = 'http://localhost:5000/jobs'
 
@@ -21,6 +22,7 @@ export default function AllJobsContainer(){
       <NavBar/>
       <h1 className='table-h1'>All Jobs</h1>
       <div className='table-container'>
+        <AddButton whoToAdd={'Job'} linkTo={'/add-job'}/>
         <MaterialTable
           title = "All Jobs"
           icons={tableIcons}

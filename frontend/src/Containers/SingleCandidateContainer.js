@@ -24,7 +24,7 @@ export default function AllCadidatesContainer() {
 
   return (
     <div>
-      <h1>Candidate PAge</h1>
+      <h1>Candidate Page</h1>
     </div>
   )
 }

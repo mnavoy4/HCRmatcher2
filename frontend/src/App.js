@@ -4,7 +4,8 @@ import AllCadidatesContainer from './Containers/AllCandidatesContainer';
 import AllJobsContainer from './Containers/AllJobsContainer';
 import 'fontsource-roboto'
 import AddCandidateContainer from './Containers/AddCandidateContainer/AddCandidateContainer';
-import SingleCandidateContainer from './Containers/SingleCandidateContainer'
+import SingleCandidateContainer from './Containers/SingleCandidateContainer';
+import AddJobContainer from './Containers/AddJobContainer'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/jobs' component={AllJobsContainer} />
             <Route path='/add-candidate' component={AddCandidateContainer}/>
             <Route path='/candidate/:id' component={SingleCandidateContainer}/>
+            <Route path='/add-job' component={AddJobContainer}/>
           </div>
         </div>
       </div>

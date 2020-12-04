@@ -3,7 +3,7 @@ import MaterialTable from 'material-table';
 import { tableIcons } from '../assets/tableIcons'
 import NavBar from '../Components/NavBar';
 import axios from 'axios';
-import AddCandidateButton from '../Components/AddCandidateButton';
+import AddButton from '../Components/AddButton';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +27,7 @@ export default function AllCadidatesContainer() {
       <NavBar/>
       <h1 className='table-h1'>All Candidates</h1>
       <div className='table-container'>
-        <AddCandidateButton />
+        <AddButton whatToAdd={'Candidate'} linkTo={'/add-candidate'}/>
         <MaterialTable
           title = "All Candidates"
           icons={tableIcons}

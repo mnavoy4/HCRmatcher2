@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddCandidateButton(){
+export default function AddButton(props){
   const classes = useStyles()
   return (
     <div>
@@ -20,8 +20,12 @@ export default function AddCandidateButton(){
         className={classes.button}
         startIcon={<CloudUploadIcon />}
       >
-        <Link to='/add-candidate' style={{ color: 'whitesmoke' }}>
-        Add Candidate
+        <Link
+          to={'/add-candidate'}
+          to={props.linkTo}
+          style={{ color: 'whitesmoke' }}
+        >
+          Add {props.whatToAdd}
         </Link>
       </Button>
     </div>
