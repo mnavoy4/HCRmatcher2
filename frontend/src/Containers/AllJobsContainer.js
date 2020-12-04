@@ -7,20 +7,37 @@ import AddButton from '../Components/AddButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import ConfirmDeleteButton from '../Components/ConfirmDeleteButton'
 
 const baseURL = 'http://localhost:5000/jobs'
 
 export default function AllJobsContainer(){
 
+  const [modalClicked, setModalClicked] = useState(false)
+
+  const fetchData = async () => {
+    const result = await axios(baseURL)
+    setJobData(result.data)
+  }
+
   const [jobData, setJobData] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(baseURL)
-      setJobData(result.data)
-    }
     fetchData()
-  }, [])
-  console.log(jobData)
+  }, []);
+
+  const toggleDeleteModal = () => {
+    setModalClicked(!modalClicked)
+  }
+
+  const deleteJob = (id) => {
+    axios.delete(baseURL + `/${id}`)
+      .then(fetchData())
+  }
   return (
     <div>
       <NavBar/>
@@ -51,12 +68,21 @@ export default function AllJobsContainer(){
             {
               icon: () => <FontAwesomeIcon icon={faTrash} />,
               tooltip: 'Delete Job',
-              onClick: (event, rowData) => alert("You want to delete this job " + rowData.name)
+              onClick: (event, rowData) => deleteJob(rowData._id)
             }
           ]}
         />
       </div>
-      
+      {/* <Dialog
+        open={modalClicked}
+        onClose={toggleDeleteModal}
+      >
+        <DialogTitle>{"Please confirm you want to delete job"}</DialogTitle>
+        <DialogActions>
+          <ConfirmDeleteButton onClick={deleteJob}/>
+          <Button>Do not delete</Button>
+        </DialogActions>
+      </Dialog> */}
     </div>
   )
 }
