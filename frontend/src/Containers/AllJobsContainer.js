@@ -37,7 +37,7 @@ export default function AllJobsContainer(){
             // { title: "Skills", field: 'skills' },
             // { title: "Industries", field: 'industries' },
             { title: "US Citizenship Required?", field: "citizenshipRequired", type: 'boolean'},
-            // { title: "Security Clearance", field: 'securityClearance' }
+            { title: "Security Clearance Required?", field: 'securityClearanceRequired' }
           ]}
           
           options={{

@@ -17,6 +17,7 @@ const jobSchema = new mongoose.Schema({
   salaryRange: { type: String, required: true },
   skillsRequired: { type: Array, required: true },
   degreesRequired: { type: Array, required: true },
+  securityClearanceRequired: { type: String, required: true, enum: ["None", "Secret", "Public Trust", "Top Secret", "TS/SCI", "Confidential"] },
   tags: { type: Array },
   recruiter: { type: String },
   status: { type: String, enum: ['Open', 'Closed', 'Paused'] },

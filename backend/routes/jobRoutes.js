@@ -20,6 +20,7 @@ router.post('/add', (req, res) => {
     citizenshipRequired: req.body.citizenshipRequired,
     relocationAssistance: req.body.relocationAssistance,
     client: req.body.client,
+    securityClearanceRequired: req.body.securityClearanceRequired,
     salaryRange: req.body.salaryRange,
     skillsRequired: req.body.skillsRequired,
     degreesRequired: req.body.degreesRequired,
@@ -60,6 +61,7 @@ router.post('/update/:id', (req, res) => {
       job.citizenshipRequired = req.body.citizenshipRequired;
       job.relocationAssistance = req.body.relocationAssistance;
       job.client = req.body.client;
+      job.securityClearanceRequired = req.body.securityClearanceRequired;
       job.salaryRange = req.body.salaryRange;
       job.skillsRequired = req.body.skillsRequired;
       job.degreesRequired = req.body.degreesRequired;
