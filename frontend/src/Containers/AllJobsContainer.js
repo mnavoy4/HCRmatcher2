@@ -3,7 +3,9 @@ import { tableIcons } from '../assets/tableIcons';
 import MaterialTable from 'material-table';
 import NavBar from '../Components/NavBar';
 import axios from 'axios';
-import AddButton from '../Components/AddButton'
+import AddButton from '../Components/AddButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const baseURL = 'http://localhost:5000/jobs'
 
@@ -13,16 +15,17 @@ export default function AllJobsContainer(){
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(baseURL)
-      setJobData(result)
+      setJobData(result.data)
     }
     fetchData()
   }, [])
+  console.log(jobData)
   return (
     <div>
       <NavBar/>
       <h1 className='table-h1'>All Jobs</h1>
       <div className='table-container'>
-        <AddButton whoToAdd={'Job'} linkTo={'/add-job'}/>
+        <AddButton whatToAdd={'Job'} linkTo={'/add-job'}/>
         <MaterialTable
           title = "All Jobs"
           icons={tableIcons}
@@ -30,12 +33,11 @@ export default function AllJobsContainer(){
             { title: "Title", field: 'title' , type: 'string' },
             { title: "Location", field: 'state' , type: 'string'},
             { title: "Is Remote?", field: 'remote', type: 'boolean' },
-            { title: "Overall Seniority in Years", field: 'overallExperience' },
-            { title: "Qualifications", field: 'skillsRequired' },
-            { title: "Skills", field: 'skills' },
-            { title: "Industries", field: 'industries' },
+            // { title: "Qualifications", field: 'skillsRequired' },
+            // { title: "Skills", field: 'skills' },
+            // { title: "Industries", field: 'industries' },
             { title: "US Citizenship Required?", field: "citizenshipRequired", type: 'boolean'},
-            { title: "Security Clearance", field: 'securityClearance' }
+            // { title: "Security Clearance", field: 'securityClearance' }
           ]}
           
           options={{
@@ -46,7 +48,7 @@ export default function AllJobsContainer(){
           data={jobData}
           actions={[
             {
-              icon: 'delete',
+              icon: () => <FontAwesomeIcon icon={faTrash} />,
               tooltip: 'Delete Job',
               onClick: (event, rowData) => alert("You want to delete this job " + rowData.name)
             }

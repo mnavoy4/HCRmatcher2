@@ -9,7 +9,8 @@ import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGro
 // import ClearanceRadios from '../../Components/ClearanceRadios';
 import * as allIndustries from '../../data/industries';
 import * as allSkills from '../../data/skills';
-import axios from 'axios'
+import axios from 'axios';
+import NavBar from '../../Components/NavBar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +42,7 @@ const postCandidateURL = 'http://localhost:5000/candidates/add'
 export default function AddCandidateContainer(props){
 
   const { industries } = allIndustries.default;
-  const { skills } = allSkills.default
+  const { skills } = allSkills.default;
 
   const { register, handleSubmit, control } = useForm()
   const classes = useStyles();
@@ -101,8 +102,6 @@ export default function AddCandidateContainer(props){
       usCitizen: fixedUsCitizen,
       wantsRemote: fixedWantsRemote
     }
-    console.log(typeof newData.openToRelocation)
-    console.log(newData)
     axios.post(postCandidateURL, newData)
       .then(response => console.log(response))
       .catch((error) => console.log(error))
@@ -112,6 +111,7 @@ export default function AddCandidateContainer(props){
 
   return (
     <div>
+      <NavBar/>
       <header className='add-candidates-header'>
         <h1 className={classes.h1}>Add Candidate</h1>
       </header>
@@ -156,7 +156,6 @@ export default function AddCandidateContainer(props){
                     name='state'
                     variant='outlined'
                   />
-                  
                   <Controller
                     as={
                       <Paper className={classes.formItemPaper}>
@@ -256,13 +255,13 @@ export default function AddCandidateContainer(props){
                     control={control}
                   />
                   <Paper className={classes.formItemPaper}>
-                  <TextField
-                    label='Current Yearly Salary'
-                    inputRef={register({ required: true, pattern: /^[0-9]*$/i })}
-                    required
-                    name='currentSalary'
-                    variant='outlined'
-                  />
+                    <TextField
+                      label='Current Yearly Salary'
+                      inputRef={register({ required: true, pattern: /^[0-9]*$/i })}
+                      required
+                      name='currentSalary'
+                      variant='outlined'
+                    />
                   </Paper>
                   <Paper className={classes.formItemPaper}>
                     <FormLabel>Skills/Languages</FormLabel>

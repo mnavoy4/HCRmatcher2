@@ -7,7 +7,6 @@ import AddButton from '../Components/AddButton';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 const baseURL = 'http://localhost:5000/candidates'
 

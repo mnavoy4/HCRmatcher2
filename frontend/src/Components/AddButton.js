@@ -21,7 +21,6 @@ export default function AddButton(props){
         startIcon={<CloudUploadIcon />}
       >
         <Link
-          to={'/add-candidate'}
           to={props.linkTo}
           style={{ color: 'whitesmoke' }}
         >
