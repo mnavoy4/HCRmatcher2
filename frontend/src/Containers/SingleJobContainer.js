@@ -3,28 +3,28 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
 
-const baseURL = 'http://localhost:5000/candidates'
+const baseURL = 'http://localhost:5000/jobs'
 
 
-export default function SingleCandidateContainer() {
+export default function SingleJobContainer() {
 
   let { id } = useParams();
 
-  const [candidateData, setCandidateData] = useState([]);
+  const [jobData, setJobData] = useState([]);
   console.log(id)
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(baseURL + `/${id}`)
-      setCandidateData(result.data)
+      setJobData(result.data)
     }
     fetchData();
   }, []);
 
-  console.log(candidateData)
+  console.log(jobData)
 
   return (
     <div>
-      <h1>Candidate Page</h1>
+      <h1>Job Page</h1>
     </div>
   )
 }

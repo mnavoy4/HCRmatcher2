@@ -6,6 +6,7 @@ import axios from 'axios';
 import AddButton from '../Components/AddButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const baseURL = 'http://localhost:5000/jobs'
 
@@ -30,7 +31,7 @@ export default function AllJobsContainer(){
           title = "All Jobs"
           icons={tableIcons}
           columns={[
-            { title: "Title", field: 'title' , type: 'string' },
+            { title: "Title", field: 'title' , type: 'string', render: rowData => <Link to={`/job/${rowData._id}`}>{rowData.title}</Link> },
             { title: "Location", field: 'state' , type: 'string'},
             { title: "Is Remote?", field: 'remote', type: 'boolean' },
             // { title: "Qualifications", field: 'skillsRequired' },
