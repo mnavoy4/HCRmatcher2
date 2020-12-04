@@ -7,18 +7,18 @@ import AddButton from '../Components/AddButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import ConfirmDeleteButton from '../Components/ConfirmDeleteButton'
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import ConfirmDeleteButton from '../Components/ConfirmDeleteButton'
 
 const baseURL = 'http://localhost:5000/jobs'
 
 export default function AllJobsContainer(){
 
-  const [modalClicked, setModalClicked] = useState(false)
+  // const [modalClicked, setModalClicked] = useState(false)
 
   const fetchData = async () => {
     const result = await axios(baseURL)
@@ -30,9 +30,9 @@ export default function AllJobsContainer(){
     fetchData()
   }, []);
 
-  const toggleDeleteModal = () => {
-    setModalClicked(!modalClicked)
-  }
+  // const toggleDeleteModal = () => {
+  //   setModalClicked(!modalClicked)
+  // }
 
   const deleteJob = (id) => {
     axios.delete(baseURL + `/${id}`)

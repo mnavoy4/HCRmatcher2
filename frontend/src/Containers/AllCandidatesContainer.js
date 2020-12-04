@@ -12,14 +12,19 @@ const baseURL = 'http://localhost:5000/candidates'
 
 export default function AllCadidatesContainer() {
 
-  const [candidateData, setCandidateData] = useState([])
+  const [candidateData, setCandidateData] = useState([]);
+  const fetchData = async () => {
+    const result = await axios(baseURL)
+    setCandidateData(result.data)
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(baseURL)
-      setCandidateData(result.data)
-    }
-    fetchData();
-  }, [])
+    fetchData()
+  }, []);
+
+  const deleteCandidate = (id) => {
+    axios.delete(baseURL + `/${id}`)
+      .then(fetchData())
+  }
 
   return (
     <div>
@@ -49,7 +54,7 @@ export default function AllCadidatesContainer() {
             {
               icon: () => <FontAwesomeIcon icon={faTrash} />,
               tooltip: 'Delete Candidate',
-              onClick: (event, rowData) => alert("You want to delete this candidate " + rowData.name)
+              onClick: (event, rowData) => deleteCandidate(rowData._id)
             }
           ]}
         />
