@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
+import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button, Select, MenuItem } from '@material-ui/core';
 import * as allIndustries from '../../data/industries';
 import * as allSkills from '../../data/skills';
 import axios from 'axios';
@@ -36,6 +36,8 @@ const postCandidateURL = 'http://localhost:5000/candidates/add';
 const jobsURL = 'http://localhost:5000/jobs';
 
 export default function AddCandidateContainer(props){
+
+  const [jobs, setJobs] = useState([]);
 
   const { industries } = allIndustries.default;
   const { skills } = allSkills.default;
@@ -101,9 +103,18 @@ export default function AddCandidateContainer(props){
     axios.post(postCandidateURL, newData)
       .then(response => console.log(response))
       .catch((error) => console.log(error))
-      .then(props.history.push('/'))
+      // .then(props.history.push('/'))
 
   };
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const result = await axios(jobsURL)
+      setJobs(result.data)
+    }
+    fetchJobs();
+  }, []);
+  console.log(jobs)
 
   return (
     <div>
@@ -466,6 +477,29 @@ export default function AddCandidateContainer(props){
                       variant='outlined'
                     />
                   </Paper>
+                  <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
+                        <FormControl>
+                          <FormLabel>Job Applied For</FormLabel>
+                          <br></br>
+                          <Select style={{width: '90%'}}
+                            defaultValue=''
+                          >
+                            {
+                              jobs.map((job) => (
+                                <MenuItem key={job._id} value={job._id}>
+                                  {job.title}
+                                </MenuItem>
+                              ))
+                            }
+                          </Select>
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='somethingElse'
+                    control={control}
+                  />
                 </Grid>
                 <input type='submit'/>
               </Grid>

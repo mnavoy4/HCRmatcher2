@@ -33,6 +33,7 @@ router.post('/add', (req, res) => {
     jobsMatchedFor: req.body.jobsMatchedFor,
     notes: req.body.notes
   });
+  console.log(newCandidate);
   newCandidate.save()
     .then(candidate => res.json(candidate))
     .catch(error => res.status(400).json('Error: ' + error))
