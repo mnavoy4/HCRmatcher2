@@ -22,7 +22,8 @@ const jobSchema = new mongoose.Schema({
   recruiter: { type: String },
   status: { type: String, enum: ['Open', 'Closed', 'Paused'] },
   employementType: { type: String, enum: ['Full Time', 'Contract', 'Part Time'] },
-  clientFee: { type: Number, required: true }
+  clientFee: { type: Number, required: true },
+  notes: { type: String }
 });
 
 function capitalize(string){

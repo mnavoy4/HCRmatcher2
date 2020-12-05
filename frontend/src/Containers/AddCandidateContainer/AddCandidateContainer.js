@@ -2,11 +2,6 @@ import React from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
-// import RemoteOnlyRadios from '../../Components/RemoteOnlyRadios';
-// import OpenToRelocationRadios from '../../Components/OpenToRelocationRadios';
-// import WillingToGoWhere from '../../Components/WillingToGoWhere';
-// import usCitizenRadios from '../../Components/UsCitizenRadios'
-// import ClearanceRadios from '../../Components/ClearanceRadios';
 import * as allIndustries from '../../data/industries';
 import * as allSkills from '../../data/skills';
 import axios from 'axios';
@@ -37,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const postCandidateURL = 'http://localhost:5000/candidates/add'
+const postCandidateURL = 'http://localhost:5000/candidates/add';
+const jobsURL = 'http://localhost:5000/jobs';
 
 export default function AddCandidateContainer(props){
 
@@ -460,8 +456,17 @@ export default function AddCandidateContainer(props){
                     rules={{ required: true }}
                     control={control}
                   />
+                  <Paper className={classes.formItemPaper}>
+                    <FormLabel>Candidate Notes</FormLabel>
+                    <TextField
+                      label='Notes'
+                      inputRef={register}
+                      multiline
+                      name='notes'
+                      variant='outlined'
+                    />
+                  </Paper>
                 </Grid>
-                
                 <input type='submit'/>
               </Grid>
             </form>

@@ -30,7 +30,8 @@ router.post('/add', (req, res) => {
     jobTitles: req.body.jobTitles,
     stageInProcess: req.body.stageInProcess,
     jobsAppliedFor: req.body.jobsAppliedFor,
-    jobsMatchedFor: req.body.jobsMatchedFor
+    jobsMatchedFor: req.body.jobsMatchedFor,
+    notes: req.body.notes
   });
   newCandidate.save()
     .then(candidate => res.json(candidate))
@@ -74,6 +75,7 @@ router.post('/update/:id', (req, res) => {
       candidate.stageInProcess = req.body.stageInProcess;
       candidate.jobsAppliedFor = req.body.jobsAppliedFor;
       candidate.jobsMatchedFor = req.body.jobsMatchedFor;
+      candidate.notes = req.body.notes;
       candidate.save()
         .then(updatedCandidate => res.json(updatedCandidate))
         .catch(error => res.status(400).json('Error: ' + error))

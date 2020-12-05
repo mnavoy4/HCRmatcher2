@@ -28,7 +28,8 @@ router.post('/add', (req, res) => {
     recruiter: req.body.recruiter,
     status: req.body.status,
     employementType: req.body.employementType,
-    clientFee: req.body.clientFee
+    clientFee: req.body.clientFee,
+    notes: req.body.notes
   });
   newJob.save()
     .then(job => res.json(job))
@@ -70,6 +71,7 @@ router.post('/update/:id', (req, res) => {
       job.status = req.body.status;
       job.employementType = req.body.employementType;
       job.clientFee = req.body.clientFee;
+      job.notes = req.body.notes;
       job.save()
         .then(updatedJob => res.json(updatedJob))
         .catch(error => res.status(400).json('Error: ' + error))

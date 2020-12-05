@@ -127,7 +127,7 @@ export default function AddJobContainer(props){
                   />
                   <TextField
                     label='Client If Known'
-                    inputRef={register({ required: true, pattern: /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/im })}
+                    inputRef={register({ required: true })}
                     name='client'
                     variant='outlined'
                   />
@@ -245,6 +245,16 @@ export default function AddJobContainer(props){
                     control={control}
                     defaultValue=''
                   />
+                  <Paper className={classes.formItemPaper}>
+                    <FormLabel>Job Notes</FormLabel>
+                    <TextField
+                      label='Notes'
+                      inputRef={register}
+                      multiline
+                      name='notes'
+                      variant='outlined'
+                    />
+                  </Paper>
                 </Grid>
                 
                 <Grid item xs={6}>

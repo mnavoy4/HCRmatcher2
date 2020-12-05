@@ -38,6 +38,8 @@ export default function AllJobsContainer(){
     axios.delete(baseURL + `/${id}`)
       .then(fetchData())
   }
+
+  console.log(jobData)
   return (
     <div>
       <NavBar/>

@@ -20,6 +20,7 @@ const candidateSchema = new mongoose.Schema({
   certifications: { type: Array },
   jobTitles: { type: Array, required: true },
   stageInProcess: { type: String, enum: ["Submitted", "Client Interview", "Zoom Screen", "Hired", "Not Hired", "Offer Made"], required: true },
+  notes: { type: String },
   jobsAppliedFor: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Job"
