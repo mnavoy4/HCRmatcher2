@@ -2,6 +2,7 @@ const router = require('express').Router();
 let User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 router.get('/', (req, res) => {
   User.find()
@@ -44,13 +45,18 @@ router.post('/login', async (req, res) => {
   }
   try {
     if (await bcrypt.compare(req.body.password, foundUser.password)){
-      res.json(foundUser)
+      console.log('entered')
+      const accessToken = jwt.sign({foundUser}, process.env.ACCESS_TOKEN_SECRET)
+      res.json({ accessToken: accessToken })
     } else {
       res.send('Not allowed')
     }
   } catch {
     res.status(500).send("Something to send")
   }
+
+  const accessToken = jwt.sign(foundUser, process.env.ACCESS_TOKEN_SECRET)
+
 
   // if (email === foundUser.email && password === foundUser.password){
   //   jwt.sign({foundUser}, 'bassnectar', { expiresIn: '24h'}, (err, token) => {
