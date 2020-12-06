@@ -22,7 +22,7 @@ router.post('/add', async (req, res) => {
     })
     console.log(newUser);
     newUser.save()
-      .then(user => res.send(user))
+      .then(user => res.json(user))
       .catch(error => res.status(400).json('Error: ' + error))
   }
   catch {
@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
   // const { body } = req;
   // const { email, password } = body;
 
-  const foundUser = await User.find({ email: req.body.email }).exec()
+  const foundUser = await User.findOne({ email: req.body.email }).exec()
 
   console.log(foundUser)
 
