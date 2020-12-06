@@ -3,8 +3,9 @@ let User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
+const { authenticateToken } = require('../middleware')
 
-router.get('/', (req, res) => {
+router.get('/', authenticateToken, (req, res) => {
   User.find()
     .then(users => res.json(users))
     .catch(error => res.status(400).json('Error ' + error))
@@ -21,7 +22,6 @@ router.post('/add', async (req, res) => {
       phoneNumber: req.body.phoneNumber,
       manager: req.body.manager
     })
-    console.log(newUser);
     newUser.save()
       .then(user => res.json(user))
       .catch(error => res.status(400).json('Error: ' + error))
@@ -31,10 +31,7 @@ router.post('/add', async (req, res) => {
   }
 })
 
-router.post('/login', async (req, res) => {
-
-  // const { body } = req;
-  // const { email, password } = body;
+router.post('/login', async (req, res, next) => {
 
   const foundUser = await User.findOne({ email: req.body.email }).exec()
 
@@ -46,17 +43,15 @@ router.post('/login', async (req, res) => {
   try {
     if (await bcrypt.compare(req.body.password, foundUser.password)){
       console.log('entered')
-      const accessToken = jwt.sign({foundUser}, process.env.ACCESS_TOKEN_SECRET)
+      const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET)
       res.json({ accessToken: accessToken })
     } else {
       res.send('Not allowed')
     }
-  } catch {
-    res.status(500).send("Something to send")
+  } catch (error) {
+    res.status(500).send("Error: " + error);
+    next(error);
   }
-
-  const accessToken = jwt.sign(foundUser, process.env.ACCESS_TOKEN_SECRET)
-
 
   // if (email === foundUser.email && password === foundUser.password){
   //   jwt.sign({foundUser}, 'bassnectar', { expiresIn: '24h'}, (err, token) => {
