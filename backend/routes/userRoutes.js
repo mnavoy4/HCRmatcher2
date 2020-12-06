@@ -11,9 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/add', async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.password, salt)
-    console.log(salt, hashedPassword);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
@@ -34,23 +32,32 @@ router.post('/add', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 
-  const { body } = req;
-  const { email, password } = body;
+  // const { body } = req;
+  // const { email, password } = body;
 
-  const foundUser = User.findOne({ email: email }, function (error, user){
-    if (error){
-      console.log(error)
+  const foundUser = await User.find({ email: req.body.email }).exec()
+
+  console.log(foundUser)
+
+  if (!foundUser){
+    return res.status(400).send('Cannot find User')
+  }
+  try {
+    if (await bcrypt.compare(req.body.password, foundUser.password)){
+      res.json(foundUser)
     } else {
-      return user
+      res.send('Not allowed')
     }
-  })
+  } catch {
+    res.status(500).send("Something to send")
+  }
 
-  if (email === foundUser.email && password === foundUser.password){
-    jwt.sign({foundUser}, 'bassnectar', { expiresIn: '24h'}, (err, token) => {
-      if (err) { console.log(err) }
-      res.send(token);
-    });
-  } else { console.log('ERROR : Could not log in') }
+  // if (email === foundUser.email && password === foundUser.password){
+  //   jwt.sign({foundUser}, 'bassnectar', { expiresIn: '24h'}, (err, token) => {
+  //     if (err) { console.log(err) }
+  //     res.send(token); 
+  //   });
+  // } else { console.log('ERROR : Could not log in') }
 })
 
 module.exports = router
