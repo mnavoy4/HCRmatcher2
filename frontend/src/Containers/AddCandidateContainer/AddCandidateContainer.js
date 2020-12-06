@@ -77,7 +77,7 @@ export default function AddCandidateContainer(props){
     }
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const onlyTrueSkills = data.skills.filter((skill) => {
       return skill.skill !== false;
     });
@@ -100,7 +100,7 @@ export default function AddCandidateContainer(props){
       usCitizen: fixedUsCitizen,
       wantsRemote: fixedWantsRemote
     }
-    axios.post(postCandidateURL, newData)
+    await axios.post(postCandidateURL, newData)
       .then(response => console.log(response))
       .catch((error) => console.log(error))
       // .then(props.history.push('/'))
@@ -481,6 +481,48 @@ export default function AddCandidateContainer(props){
                     as={
                       <Paper className={classes.formItemPaper}>
                         <FormControl>
+                          <FormLabel>Any Startup Experience?</FormLabel>
+                          <RadioGroup row>
+                            {
+                              jobs.map((job) => (
+                                <FormControlLabel value={job._id} control={<Radio/>} label={job.title} />
+                              ))
+                            }
+                          </RadioGroup>
+                        </FormControl>
+                      </Paper>
+                    }
+                    name='jobsAppliedFor'
+                    control={control}
+                    defaultValue=''
+                  />
+                  <FormControl>
+                    {/* <TextField
+                      select
+                      defaultValue=''
+                      label='Job Applied For'
+                      inputProps={{
+                        inputRef: (ref) => {
+                          if (!ref) return;
+                          register({
+                            name: 'jobsAppliedFor',
+                            value: ref._id,
+                            defaultValue: '',
+                          });
+                        },
+                      }}
+                    >
+                      {
+                        jobs.map((job) => (
+                          <MenuItem key={job._id} value={job._id}>
+                            {job.title}
+                          </MenuItem>
+                        ))
+                      }
+                    </TextField> */}
+                  {/* <Controller
+                    as={
+                      <Paper className={classes.formItemPaper}>
                           <FormLabel>Job Applied For</FormLabel>
                           <br></br>
                           <Select style={{width: '90%'}}
@@ -494,12 +536,12 @@ export default function AddCandidateContainer(props){
                               ))
                             }
                           </Select>
-                        </FormControl>
                       </Paper>
                     }
-                    name='somethingElse'
+                    name='jobsAppliedFor'
                     control={control}
-                  />
+                  /> */}
+                  </FormControl>
                 </Grid>
                 <input type='submit'/>
               </Grid>

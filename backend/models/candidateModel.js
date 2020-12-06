@@ -31,13 +31,13 @@ const candidateSchema = new mongoose.Schema({
   }]
 });
 
-function capitalize(string){
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
+// function capitalize(string){
+//   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+// }
 
-function capitalizeEachWord(string){
-  return string.split(' ').map(capitalize).join(' ');
-}
+// function capitalizeEachWord(string){
+//   return string.split(' ').map(capitalize).join(' ');
+// }
 
 // candidateSchema.pre('save', function(next){
 //   capitalizeEachWord(this.name);
