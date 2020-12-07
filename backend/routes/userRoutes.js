@@ -1,9 +1,10 @@
 const router = require('express').Router();
 let User = require('../models/userModel');
+let RefreshToken = require('../models/refreshTokenModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-const { authenticateToken } = require('../middleware')
+const { authenticateToken } = require('../middleware');
 
 router.get('/', (req, res) => {
   User.find()
