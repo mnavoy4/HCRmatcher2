@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Job = require('../models/jobModel');
+const { authenticateToken } = require('../middleware');
 
 router.get('/', (req, res) => {
   Job.find()
@@ -7,7 +8,7 @@ router.get('/', (req, res) => {
     .catch(error => res.status(400).json('Error: ' + error))
 })
 
-router.post('/add', (req, res) => {
+router.post('/add', authenticateToken, (req, res) => {
   const newJob = new Job({
     title: req.body.title,
     city: req.body.city,

@@ -16,6 +16,7 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
+    "devStartAuth": "nodemon authServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
