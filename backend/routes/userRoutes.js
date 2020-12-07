@@ -1,6 +1,7 @@
 const router = require('express').Router();
+// const refreshTokenRouter = require('express').Router();
 let User = require('../models/userModel');
-let RefreshToken = require('../models/refreshTokenModel');
+// let RefreshToken = require('../models/refreshTokenModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
@@ -32,21 +33,29 @@ router.post('/add', async (req, res) => {
   }
 })
 
+// function makeRefreshToken(user){
+//   router.post('/refresh-token/add', (req, res, next) => {
+//   const newRefreshToken = new RefreshToken({
+//     refreshToken: jwt.sign(user.toJSON(), process.env.REFRESH_TOKEN_SECRET)
+//   });
+//   newRefreshToken.save()
+//     .then(refreshToken => console.log(refreshToken))
+//     .catch(error => res.status(400).json("Error: " + error))
+//   console.log(newRefreshToken)
+//   next();
+// })}
+
 router.post('/login', async (req, res, next) => {
 
-  console.log(req.body)
-
   const foundUser = await User.findOne({ email: req.body.email }).exec()
-
   console.log(foundUser)
 
   if (!foundUser){
     return res.status(400).send('Cannot find User')
   }
 
-  console.log(await bcrypt.compare(req.body.password, foundUser.password))
   try {
-    if (await bcrypt.compareSync(req.body.password, foundUser.password)){
+    if (await bcrypt.compare(req.body.password, foundUser.password)){
       // console.log('entered')
       const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
       const refreshToken = jwt.sign(foundUser.toJSON(), process.env.REFRESH_TOKEN_SECRET)
