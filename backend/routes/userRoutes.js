@@ -46,9 +46,8 @@ router.post('/login', async (req, res, next) => {
   console.log(await bcrypt.compare(req.body.password, foundUser.password))
   try {
     if (await bcrypt.compareSync(req.body.password, foundUser.password)){
-      console.log('entered')
+      // console.log('entered')
       const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
-      console.log(accessToken);
       const refreshToken = jwt.sign(foundUser.toJSON(), process.env.REFRESH_TOKEN_SECRET)
       res.json({
         accessToken: accessToken,
