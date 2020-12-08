@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 const { authenticateToken } = require('../middleware');
 
+
 router.get('/', (req, res) => {
   User.find()
     .then(users => res.json(users))
@@ -33,17 +34,6 @@ router.post('/add', async (req, res) => {
   }
 })
 
-// function makeRefreshToken(user){
-//   router.post('/refresh-token/add', (req, res, next) => {
-//   const newRefreshToken = new RefreshToken({
-//     refreshToken: jwt.sign(user.toJSON(), process.env.REFRESH_TOKEN_SECRET)
-//   });
-//   newRefreshToken.save()
-//     .then(refreshToken => console.log(refreshToken))
-//     .catch(error => res.status(400).json("Error: " + error))
-//   console.log(newRefreshToken)
-//   next();
-// })}
 
 router.post('/login', async (req, res, next) => {
 
@@ -57,7 +47,8 @@ router.post('/login', async (req, res, next) => {
   try {
     if (await bcrypt.compare(req.body.password, foundUser.password)){
       // console.log('entered')
-      const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+      const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET)
+      // const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
       const refreshToken = jwt.sign(foundUser.toJSON(), process.env.REFRESH_TOKEN_SECRET)
       res.json({
         accessToken: accessToken,
