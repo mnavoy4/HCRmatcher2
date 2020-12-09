@@ -36,6 +36,7 @@ router.post('/add', (req, res) => {
   console.log(newCandidate);
   newCandidate.save()
     .then(candidate => res.json(candidate))
+    // .then(candidate => console.log(candidate))
     .catch(error => res.status(400).json('Error: ' + error))
 })
 

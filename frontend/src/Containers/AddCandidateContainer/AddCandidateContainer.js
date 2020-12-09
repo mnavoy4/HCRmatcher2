@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button, Select, MenuItem } from '@material-ui/core';
+import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
 import * as allIndustries from '../../data/industries';
 import * as allSkills from '../../data/skills';
+import Select from 'react-select';
 import axios from 'axios';
-import NavBar from '../../Components/NavBar'
+import NavBar from '../../Components/NavBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -114,7 +115,6 @@ export default function AddCandidateContainer(props){
     }
     fetchJobs();
   }, []);
-  console.log(jobs)
 
   return (
     <div>
@@ -481,7 +481,7 @@ export default function AddCandidateContainer(props){
                     as={
                       <Paper className={classes.formItemPaper}>
                         <FormControl>
-                          <FormLabel>Any Startup Experience?</FormLabel>
+                          <FormLabel>Job Applied For</FormLabel>
                           <RadioGroup row>
                             {
                               jobs.map((job) => (
@@ -496,52 +496,13 @@ export default function AddCandidateContainer(props){
                     control={control}
                     defaultValue=''
                   />
-                  <FormControl>
-                    {/* <TextField
-                      select
-                      defaultValue=''
-                      label='Job Applied For'
-                      inputProps={{
-                        inputRef: (ref) => {
-                          if (!ref) return;
-                          register({
-                            name: 'jobsAppliedFor',
-                            value: ref._id,
-                            defaultValue: '',
-                          });
-                        },
-                      }}
-                    >
-                      {
-                        jobs.map((job) => (
-                          <MenuItem key={job._id} value={job._id}>
-                            {job.title}
-                          </MenuItem>
-                        ))
-                      }
-                    </TextField> */}
                   {/* <Controller
-                    as={
-                      <Paper className={classes.formItemPaper}>
-                          <FormLabel>Job Applied For</FormLabel>
-                          <br></br>
-                          <Select style={{width: '90%'}}
-                            defaultValue=''
-                          >
-                            {
-                              jobs.map((job) => (
-                                <MenuItem key={job._id} value={job._id}>
-                                  {job.title}
-                                </MenuItem>
-                              ))
-                            }
-                          </Select>
-                      </Paper>
-                    }
-                    name='jobsAppliedFor'
+                    as={Select}
                     control={control}
+                    isMulti
+                    options={jobs.map(job => ({ label: job.title, value: job._id }))}
+                    name='jobsAppliedFor'
                   /> */}
-                  </FormControl>
                 </Grid>
                 <input type='submit'/>
               </Grid>
