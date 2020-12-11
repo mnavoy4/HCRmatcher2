@@ -5,5 +5,6 @@ export default {
   'PHP', 'Winforms', 'ASIC', 'Pytorch', 'Tensorflow',
   'Redux', 'Express', 'API', 'Backend', 'Frontend',
   'Ruby', 'Ruby on Rails', 'SQL', 'MySQL', 'Relational DBs',
-  'Non-Relational DBs', 'MongoDB', 'DynamoDB', 'Project Management', 'PostgreSQL', ]
+  'Non-Relational DBs', 'MongoDB', 'DynamoDB', 'Project Management',
+  'PostgreSQL', 'Haskell', 'Scala', 'Ci/CD']
 }
