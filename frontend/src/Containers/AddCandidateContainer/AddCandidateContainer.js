@@ -496,6 +496,14 @@ export default function AddCandidateContainer(props){
                     control={control}
                     defaultValue=''
                   />
+                  {/* <select
+                    name='jobsAppliedFor'
+                    register={register({ required: true })}
+                  >
+                    {jobs.map(job => (
+                      <option value={job._id}>{job.title}</option>
+                    ))}
+                  </select> */}
                   {/* <Controller
                     as={Select}
                     control={control}
