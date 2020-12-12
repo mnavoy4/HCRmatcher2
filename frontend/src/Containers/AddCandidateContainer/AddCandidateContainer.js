@@ -135,35 +135,50 @@ export default function AddCandidateContainer(props){
                 <Grid item xs={6}>
                   <TextField
                     label='Full Name'
-                    inputRef={register({ required: true, pattern: /^([a-zA-Z'-.]+ [a-zA-Z'-.]+)$/gm })}
+                    inputRef={register({
+                      required: true,
+                      // pattern: /^([a-zA-Z'-.]+ [a-zA-Z'-.]+)$/gm
+                    })}
                     required
                     name='name'
                     variant='outlined'
                   />
                   <TextField
                     label='Email'
-                    inputRef={register({ required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
+                    inputRef={register({
+                      required: true,
+                      // pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                    })}
                     required
                     name='email'
                     variant='outlined'
                   />
                   <TextField
                     label='Phone Number'
-                    inputRef={register({ required: true, pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im })}
+                    inputRef={register({
+                      required: true,
+                      // pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+                    })}
                     required
                     name='phoneNumber'
                     variant='outlined'
                   />
                   <TextField
                     label='City'
-                    inputRef={register({ required: true, pattern: /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/im })}
+                    inputRef={register({
+                      required: true,
+                      // pattern: /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/im
+                    })}
                     required
                     name='city'
                     variant='outlined'
                   />
                   <TextField
                     label='State'
-                    inputRef={register({ required: true, pattern: /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/im })}
+                    inputRef={register({
+                      required: true,
+                      // pattern: /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/im
+                    })}
                     required
                     name='state'
                     variant='outlined'

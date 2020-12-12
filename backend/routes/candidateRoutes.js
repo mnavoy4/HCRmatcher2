@@ -1,5 +1,32 @@
 const router = require('express').Router();
+const joi = require('joi');
 let Candidate = require('../models/candidateModel');
+
+const validationSchema = joi.object({
+  name: joi.string().min(3).max(25).required(),
+  email: joi.string().email().required(),
+  phoneNumber: joi.string().length(10).pattern(/^[0-9]+$/).required(),
+  city: joi.string().min(2).max(20),
+  state: joi.string().required().min(2).max(14),
+  wantsRemote: joi.boolean(),
+  openToRelocation: joi.boolean(),
+  willingToGo: joi.array().items(joi.object()),
+  usCitizen: joi.boolean().required(),
+  clearance: joi.string().min(4),
+  industriesWorkedIn: joi.array().items(joi.object()),
+  companiesWorkedFor: joi.array().items(joi.object()),
+  startupExperience: joi.boolean().required(),
+  skills: joi.array().items(joi.object()),
+  tags: joi.array().items(joi.object()),
+  currentSalary: joi.number().integer().max(1000000).min(100).positive(),
+  degrees: joi.array().items(joi.object()),
+  certifications: joi.array().items(joi.object()),
+  jobTitles: joi.array().items(joi.object()),
+  stageInProcess: joi.string().required(),
+  notes: joi.string().min(3),
+  jobsAppliedFor: joi.string(),
+  jobsMatchedFor: joi.string()
+})
 
 router.get('/', (req, res) => {
   Candidate.find()
@@ -8,6 +35,12 @@ router.get('/', (req, res) => {
 })
 
 router.post('/add', (req, res) => {
+
+  console.log("hi")
+
+  const { error } = validationSchema.validate(req.body);
+  console.log(error)
+  if (error) return res.status(400).send(error.details);
   const newCandidate = new Candidate({
     name: req.body.name,
     email: req.body.email,
@@ -36,7 +69,6 @@ router.post('/add', (req, res) => {
   console.log(newCandidate);
   newCandidate.save()
     .then(candidate => res.json(candidate))
-    // .then(candidate => console.log(candidate))
     .catch(error => res.status(400).json('Error: ' + error))
 })
 

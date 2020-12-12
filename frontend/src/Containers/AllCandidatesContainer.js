@@ -40,7 +40,6 @@ export default function AllCadidatesContainer() {
             { title: "Location", field: 'state' , type: 'string' },
             { title: "Wants Remote?", field: 'wantsRemote', type: 'boolean' },
             { title: "Willing to relocate?", field: 'openToRelocation', type: 'boolean' },
-            // { title: 'Job Applied For', field: 'jobsAppliedFor' },
             { title: "US Citizen", field: "usCitizen", type: 'boolean'},
             { title: "Security Clearance", field: 'clearance' }
           ]}

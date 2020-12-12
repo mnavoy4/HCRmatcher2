@@ -12,7 +12,6 @@ export default function SingleCandidateContainer() {
   let { id } = useParams();
 
   const [candidateData, setCandidateData] = useState([]);
-  console.log(id)
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(baseURL + `/${id}`)
@@ -20,8 +19,6 @@ export default function SingleCandidateContainer() {
     }
     fetchData();
   }, []);
-
-  console.log(candidateData)
 
   return (
     <div>
