@@ -116,6 +116,11 @@ export default function AddCandidateContainer(props){
     fetchJobs();
   }, []);
 
+  let selectOptions = []
+  jobs.map(job => {
+    selectOptions.push({ value: job._id, label: job.title })
+  })
+
   return (
     <div>
       <NavBar/>
@@ -478,39 +483,21 @@ export default function AddCandidateContainer(props){
                     />
                   </Paper>
                   <Controller
+                    control={control}
+                    name='jobsAppliedFor'
+                    defaultValue=''
                     as={
                       <Paper className={classes.formItemPaper}>
                         <FormControl>
                           <FormLabel>Job Applied For</FormLabel>
-                          <RadioGroup row>
-                            {
-                              jobs.map((job) => (
-                                <FormControlLabel value={job._id} control={<Radio/>} label={job.title} />
-                              ))
-                            }
-                          </RadioGroup>
+                            <Select
+                              options={selectOptions}
+                              defaultValue=''
+                            />
                         </FormControl>
                       </Paper>
                     }
-                    name='jobsAppliedFor'
-                    control={control}
-                    defaultValue=''
                   />
-                  {/* <select
-                    name='jobsAppliedFor'
-                    register={register({ required: true })}
-                  >
-                    {jobs.map(job => (
-                      <option value={job._id}>{job.title}</option>
-                    ))}
-                  </select> */}
-                  {/* <Controller
-                    as={Select}
-                    control={control}
-                    isMulti
-                    options={jobs.map(job => ({ label: job.title, value: job._id }))}
-                    name='jobsAppliedFor'
-                  /> */}
                 </Grid>
                 <input type='submit'/>
               </Grid>
