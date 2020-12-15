@@ -3,3 +3,4 @@ export default {
   'ASIC', 'Cyber Security', 'Defense', 'Aerospace', 'Data Science', 'Machine Learning', 'IT', 'Project Management',
   'Blockchain', 'Education', 'Oil and Gas', 'Military', 'Publishing', 'Automotive', 'Language Processing']
 }
+

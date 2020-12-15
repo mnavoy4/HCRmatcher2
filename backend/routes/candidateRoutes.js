@@ -36,8 +36,6 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
 
-  console.log("hi")
-
   const { error } = validationSchema.validate(req.body);
   console.log(error)
   if (error) return res.status(400).send(error.details);
