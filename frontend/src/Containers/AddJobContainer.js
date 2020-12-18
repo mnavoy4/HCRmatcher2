@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
 import axios from 'axios';
 import NavBar from '../Components/NavBar';
-import * as allSkills from '../data/skills';
+// import * as allSkills from '../data/skills';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,14 +33,14 @@ const useStyles = makeStyles((theme) => ({
 
 const postJobURL = 'http://localhost:5000/jobs/add'
 const getIndustriesURL = 'http://localhost:5000/industries';
+const getSkillsURL = 'http://localhost:5000/skills';
 
 export default function AddJobContainer(props){
   
   const [lowEndSalary, setLowEndSalary] = useState('');
   const [highEndSalary, setHighEndSalary] = useState('');
   const [industries, setIndustries] = useState([]);
-  
-  const { skills } = allSkills.default;
+  const [skills, setSkills] = useState([]);
 
   const { register, handleSubmit, control } = useForm()
   const classes = useStyles();
@@ -93,12 +93,17 @@ export default function AddJobContainer(props){
   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchIndustries = async () => {
       const result = await axios(getIndustriesURL)
-      console.log(result)
       setIndustries(result.data)
     }
-    fetchData();
+    const fetchSkills = async () => {
+      const result = await axios(getSkillsURL)
+      console.log(result)
+      setSkills(result.data)
+    }
+    fetchIndustries();
+    fetchSkills();
   }, []);
 
 
@@ -383,7 +388,7 @@ export default function AddJobContainer(props){
                     {
                       skills.map((skill, index) => {
                         return (
-                        <FormControlLabel key={skill} label={skill} control={<Checkbox inputRef={register} color='primary' name={`skillsRequired[${index}].skill`}/>} value={skill} />
+                        <FormControlLabel key={skill._id} label={skill.skill} control={<Checkbox inputRef={register} color='primary' name={`skillsRequired[${index}].skill`}/>} value={skill.skill} />
                         )
                       })
                     }

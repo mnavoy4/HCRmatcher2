@@ -5,6 +5,7 @@ const usersRouter = require('./routes/userRoutes');
 const jobsRouter = require('./routes/jobRoutes');
 const candidatesRouter = require('./routes/candidateRoutes');
 const industriesRouter = require('./routes/industryRoutes');
+const skillsRouter = require('./routes/skillRoutes')
 
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ app.use('/jobs', jobsRouter);
 app.use('/candidates', candidatesRouter);
 app.use('/users', usersRouter);
 app.use('/industries', industriesRouter);
+app.use('/skills', skillsRouter);
 // app.use('refresh-tokens', )
 
 app.listen(port, () => {
