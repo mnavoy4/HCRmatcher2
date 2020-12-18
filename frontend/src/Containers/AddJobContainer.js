@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Paper, RadioGroup, FormControlLabel, Checkbox, FormGroup, Radio, FormLabel, FormControl, Button } from '@material-ui/core';
 import axios from 'axios';
 import NavBar from '../Components/NavBar';
-import * as allIndustries from '../data/industries';
 import * as allSkills from '../data/skills';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,14 +32,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const postJobURL = 'http://localhost:5000/jobs/add'
+const getIndustriesURL = 'http://localhost:5000/industries';
 
 export default function AddJobContainer(props){
-
-  const { industries } = allIndustries.default;
-  const { skills } = allSkills.default;
-
+  
   const [lowEndSalary, setLowEndSalary] = useState('');
   const [highEndSalary, setHighEndSalary] = useState('');
+  const [industries, setIndustries] = useState([]);
+  
+  const { skills } = allSkills.default;
+
+  
 
   const { register, handleSubmit, control } = useForm()
   const classes = useStyles();
@@ -91,6 +93,15 @@ export default function AddJobContainer(props){
   const handleHighEndSalaryChange = (event) => {
     setHighEndSalary(event.target.value)
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(getIndustriesURL)
+      setIndustries(result.data)
+    }
+    fetchData();
+  }, []);
+
 
   return (
     <div>
