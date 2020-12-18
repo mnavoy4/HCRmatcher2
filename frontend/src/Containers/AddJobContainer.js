@@ -82,7 +82,7 @@ export default function AddJobContainer(props){
     axios.post(postJobURL, newData)
       .then(response => console.log(response))
       .catch(error => console.log(error))
-      .then(props.history.push('/jobs'))
+      // .then(props.history.push('/jobs'))
   }
 
   const handleLowEndSalaryChange = (event) => {

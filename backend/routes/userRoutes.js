@@ -50,10 +50,12 @@ router.post('/login', async (req, res, next) => {
       const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET)
       // const accessToken = jwt.sign(foundUser.toJSON(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
       const refreshToken = jwt.sign(foundUser.toJSON(), process.env.REFRESH_TOKEN_SECRET)
-      res.json({
-        accessToken: accessToken,
-        refreshToken: refreshToken
-      }).cookie('accessToken', accessToken);
+      res.cookie('accessToken', accessToken)
+      //   .json({
+      //   accessToken: accessToken,
+      //   refreshToken: refreshToken
+      // })
+      // .redirect('http://localhost:3000')
     } else {
       res.send('Not allowed')
     }

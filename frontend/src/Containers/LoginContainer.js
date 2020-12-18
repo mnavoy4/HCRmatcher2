@@ -5,6 +5,8 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, LockRounded } from '@material-ui/icons';
 
+const loginURL = 'http://localhost:4000/users/login'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -38,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
   },
   firstNestedGrid: {
     padding: 10
+  },
+  form: {
+    maxWidth: 400,
+    minWidth: 300,
+    display: 'flex',
+    flexDirection: 'column'
   }
 }));
 
@@ -47,6 +55,9 @@ export default function LoginContainer(props){
   const { register, handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     console.log(data)
+    axios.post(loginURL, data)
+      .then(response => console.log(response))
+      .catch(error => error)
   }
   return (
     <div>
@@ -69,7 +80,10 @@ export default function LoginContainer(props){
           justify='space-between'
         >
           <div></div>
-          <form style={{ display: 'flex', flexDirection: 'column', maxWidth: 400, minWidth: 300 }}>
+          <form
+            className={classes.form}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Grid container justify='center'>
               <img
                 src='https://static.wixstatic.com/media/206294_1e4e4cb5cc9a47a68248897bcb86c029~mv2.png/v1/fill/w_302,h_65,al_c,q_85,usm_0.66_1.00_0.01/Logo.webp'
