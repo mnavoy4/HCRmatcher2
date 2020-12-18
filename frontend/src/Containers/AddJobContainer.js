@@ -42,8 +42,6 @@ export default function AddJobContainer(props){
   
   const { skills } = allSkills.default;
 
-  
-
   const { register, handleSubmit, control } = useForm()
   const classes = useStyles();
 
@@ -97,6 +95,7 @@ export default function AddJobContainer(props){
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(getIndustriesURL)
+      console.log(result)
       setIndustries(result.data)
     }
     fetchData();
@@ -223,7 +222,7 @@ export default function AddJobContainer(props){
                     {
                       industries.map((industry, index) => {
                         return (
-                        <FormControlLabel key={industry} label={industry} control={<Checkbox inputRef={register} color='primary' name={`industries[${index}].industry`}/>} value={industry} />
+                        <FormControlLabel key={industry._id} label={industry.industry} control={<Checkbox inputRef={register} color='primary' name={`industries[${index}].industry`}/>} value={industry.industry} />
                         )
                       })
                     }

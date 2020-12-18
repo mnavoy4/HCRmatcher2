@@ -2,7 +2,7 @@
 
 ### Things to do
 
- - [] A select that is registed in form to submit that will select the job the applicant applied for
+ - [x] A select that is registed in form to submit that will select the job the applicant applied for
  - [] Full Auth with sotring refresh tokens in MongoDB - find tutorial
  - [] All styling...
  - [] Login page
@@ -17,3 +17,5 @@
  - [] Profle page for users
  - [] Admin rights for users
  - [] User settings
+ - [] Add Industry frontend feature
+ - [] Add Skill frontend feature
