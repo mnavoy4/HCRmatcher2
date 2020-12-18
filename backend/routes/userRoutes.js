@@ -53,7 +53,7 @@ router.post('/login', async (req, res, next) => {
       res.json({
         accessToken: accessToken,
         refreshToken: refreshToken
-      });
+      }).cookie('accessToken', accessToken);
     } else {
       res.send('Not allowed')
     }

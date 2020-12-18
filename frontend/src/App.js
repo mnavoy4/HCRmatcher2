@@ -7,6 +7,7 @@ import AddCandidateContainer from './Containers/AddCandidateContainer/AddCandida
 import SingleCandidateContainer from './Containers/SingleCandidateContainer';
 import AddJobContainer from './Containers/AddJobContainer';
 import SingleJobContainer from './Containers/SingleJobContainer';
+import LoginContainer from './Containers/LoginContainer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/candidate/:id' component={SingleCandidateContainer}/>
             <Route path='/add-job' component={AddJobContainer}/>
             <Route path='/job/:id' component={SingleJobContainer}/>
+            <Route path='/login' component={LoginContainer}/>
           </div>
         </div>
       </div>

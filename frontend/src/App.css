@@ -12,3 +12,7 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+body {
+  margin: 0
+}
