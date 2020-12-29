@@ -55,7 +55,13 @@ export default function LoginContainer(props){
   const { register, handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     console.log(data)
-    axios.post(loginURL, data)
+    axios.post(loginURL, data,
+      {
+      withCredentials: true,
+      headers: { "Access-Control-Allow-Credentials": true }
+    //   headers: {"Access-Control-Allow-Origin": "http://localhost:3000"}
+    }
+    )
       .then(response => console.log(response))
       .catch(error => error)
   }
