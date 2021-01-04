@@ -16,6 +16,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }))
 
 const mongoDbUrl = process.env.MONGODB_URL;
 mongoose.connect(mongoDbUrl, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
