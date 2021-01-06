@@ -8,6 +8,7 @@ import SingleCandidateContainer from './Containers/SingleCandidateContainer';
 import AddJobContainer from './Containers/AddJobContainer';
 import SingleJobContainer from './Containers/SingleJobContainer';
 import LoginContainer from './Containers/LoginContainer';
+import MatchesContainer from './Containers/MatchesContainer';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/add-job' component={AddJobContainer}/>
             <Route path='/job/:id' component={SingleJobContainer}/>
             <Route path='/login' component={LoginContainer}/>
+            <Route path='/matched-candidates' component={MatchesContainer} />
           </div>
         </div>
       </div>
